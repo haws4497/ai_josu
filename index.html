@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="소상공인을 위한 AI 사장님 비서" />
+  <title>AI 사장님 비서</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-mark">✦</span>
+      <span>AI 사장님 비서</span>
+    </a>
+    <div class="header-actions">
+      <a id="loginLink" class="ghost-btn" href="/login">로그인</a>
+      <a id="profileLink" class="ghost-btn hidden" href="/profile"><span id="userNickname"></span>님</a>
+      <a id="scheduleLink" class="ghost-btn hidden" href="/schedule">일정표</a>
+      <a id="salesLink" class="ghost-btn hidden" href="/sales">매출 달력</a>
+      <button id="logoutBtn" class="ghost-btn hidden" type="button">로그아웃</button>
+      <button id="businessBtn" class="ghost-btn" type="button">사업장 설정</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">AI BUSINESS ASSISTANT</div>
+      <h1>사장님의 일을<br><span>AI가 도와드립니다.</span></h1>
+      <p>홍보글부터 상품 설명, 고객 안내까지<br>한 곳에서 빠르게 만들어보세요.</p>
+    </section>
+
+    <section class="dashboard">
+      <aside class="sidebar">
+        <div class="side-title">빠른 기능</div>
+        <div class="quick-group">
+          <div class="quick-group-title">AI 작성</div>
+          <button class="quick active" data-prompt="우리 매장을 소개하는 인스타그램 홍보글을 만들어줘. 친근하고 자연스럽게 작성해줘.">✍️ 홍보글 작성</button>
+          <button class="quick" data-prompt="우리 대표 상품을 고객이 사고 싶어지도록 매력적인 상품 설명으로 작성해줘.">📝 상품 설명</button>
+          <button class="quick" data-prompt="고객에게 보낼 정중하고 친근한 안내문을 만들어줘.">💬 고객 안내문</button>
+          <button class="quick" data-prompt="우리 매장을 위한 이번 주 마케팅 아이디어 5개를 추천해줘.">💡 마케팅 아이디어</button>
+        </div>
+
+        <div class="quick-group quick-group-manage">
+          <div class="quick-group-title">업무 관리</div>
+          <a class="quick schedule-quick" href="/schedule">📅 일정표 보기</a>
+          <a class="quick schedule-quick" href="/sales">💰 매출 달력 보기</a>
+        </div>
+
+        <div class="business-card">
+          <div class="mini-label">현재 사업장</div>
+          <strong id="businessName">사업장을 등록해주세요</strong>
+          <span id="businessMeta">업종 · 지역</span>
+        </div>
+      </aside>
+
+      <section class="chat-panel">
+        <div class="chat-head">
+          <div>
+            <div class="status"><i></i> AI 비서 온라인</div>
+            <h2>무엇을 도와드릴까요?</h2>
+          </div>
+          <button id="clearBtn" class="icon-btn" title="대화 초기화">↻</button>
+        </div>
+
+        <div id="messages" class="messages">
+          <div class="message ai">
+            <div class="avatar">✦</div>
+            <div class="bubble">
+              <strong>안녕하세요! 👋</strong>
+              <p>저는 사장님의 AI 비서입니다. 아래 빠른 기능을 누르거나 원하는 일을 직접 입력해주세요.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="suggestions">
+          <button class="suggestion">인스타 홍보글 만들어줘</button>
+          <button class="suggestion">상품 설명 작성해줘</button>
+          <button class="suggestion">마케팅 아이디어 추천해줘</button>
+        </div>
+
+        <form id="chatForm" class="composer">
+          <textarea id="prompt" rows="2" placeholder="예: 이번 주말 이벤트 홍보글을 만들어줘"></textarea>
+          <button type="submit" class="send-btn">생성 <span>➜</span></button>
+        </form>
+        <p class="notice">AI가 생성한 내용은 게시 전에 사실관계와 가격·일정을 확인해주세요.</p>
+      </section>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <div class="eyebrow">BUSINESS PROFILE</div>
+          <h2>사업장 설정</h2>
+        </div>
+        <button id="closeModal" class="icon-btn">×</button>
+      </div>
+      <form id="businessForm">
+        <label>사업장 이름<input id="bName" required placeholder="예: 원석카페" /></label>
+        <label>업종<input id="bCategory" placeholder="예: 카페" /></label>
+        <label>지역<input id="bLocation" placeholder="예: 대구" /></label>
+        <label>주요 상품/서비스<input id="bProducts" placeholder="예: 아메리카노, 라떼, 케이크" /></label>
+        <label>타깃 고객<input id="bTarget" placeholder="예: 20~30대 직장인" /></label>
+        <label>원하는 말투
+          <select id="bTone">
+            <option>친근하고 정중하게</option>
+            <option>밝고 활기차게</option>
+            <option>깔끔하고 전문적으로</option>
+            <option>따뜻하고 감성적으로</option>
+          </select>
+        </label>
+        <button class="primary-btn" type="submit">저장하기</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/page-transition.js"></script>
+  <script src="/script.js"></script>
+</body>
+</html>
